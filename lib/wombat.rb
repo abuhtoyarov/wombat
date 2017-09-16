@@ -1,6 +1,7 @@
 #coding: utf-8
 
 require 'wombat/crawler'
+require_relative 'socks_proxy'
 
 module Wombat
   class << self

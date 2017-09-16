@@ -3,6 +3,7 @@ source "http://rubygems.org"
 gem 'mechanize'
 gem 'activesupport'
 gem 'rest-client'
+gem 'socksify'
 
 group :development, :test do
   gem 'bundler'

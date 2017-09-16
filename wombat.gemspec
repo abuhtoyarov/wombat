@@ -89,6 +89,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = "2.6.11".freeze
   s.summary = "Ruby DSL to scrape web pages".freeze
 
+  s.add_runtime_dependency(%q<socksify>.freeze)
+
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
@@ -131,4 +133,3 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<coveralls>.freeze, [">= 0"])
   end
 end
-

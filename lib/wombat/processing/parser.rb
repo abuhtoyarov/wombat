@@ -27,6 +27,8 @@ module Wombat
       attr_accessor :mechanize, :context, :response_code, :page
 
       def initialize
+        options = Wombat.proxy_args.extract_options!
+
         # http://stackoverflow.com/questions/6918277/ruby-mechanize-web-scraper-library-returns-file-instead-of-page
         @mechanize = Mechanize.new { |a|
           a.post_connect_hooks << lambda { |_,_,response,_|
@@ -35,9 +37,14 @@ module Wombat
             end
           }
         }
-        @mechanize.set_proxy(*Wombat.proxy_args) if Wombat.proxy_args
-        @mechanize.user_agent = Wombat.user_agent if Wombat.user_agent
-        @mechanize.user_agent_alias = Wombat.user_agent_alias if Wombat.user_agent_alias
+
+        if options[:type] == 'socks'
+          @mechanize.agent.set_socks(*Wombat.proxy_args) if Wombat.proxy_args
+        elsif options[:type] == 'http'
+          @mechanize.set_proxy(*Wombat.proxy_args) if Wombat.proxy_args
+          @mechanize.user_agent = Wombat.user_agent if Wombat.user_agent
+          @mechanize.user_agent_alias = Wombat.user_agent_alias if Wombat.user_agent_alias
+        end
       end
 
       def parse(metadata, url=nil)
