@@ -27,7 +27,7 @@ module Wombat
       attr_accessor :mechanize, :context, :response_code, :page
 
       def initialize
-        options = Wombat.proxy_args.extract_options!
+        options = Wombat.proxy_args.extract_options! rescue {}
 
         # http://stackoverflow.com/questions/6918277/ruby-mechanize-web-scraper-library-returns-file-instead-of-page
         @mechanize = Mechanize.new { |a|
